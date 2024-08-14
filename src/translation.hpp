@@ -1,3 +1,5 @@
+#pragma once
+
 struct Vector {
     // inches
     double x, y;

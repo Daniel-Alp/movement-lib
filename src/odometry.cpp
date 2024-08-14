@@ -7,8 +7,6 @@
 
 Pose global_pose{};
 
-int i = 0;
-
 void update_global_pose(double ds, double dtheta) {
     double local_dx = 0;
     double local_dy = 0;
@@ -30,12 +28,6 @@ void update_global_pose(double ds, double dtheta) {
 
     global_pose.coordinates += global_displacement;
     global_pose.theta = wrap_angle_radians(global_pose.theta + dtheta);
-
-    i++;
-    if (i % 3 == 0) {
-        Message msg{"odometry", global_pose};
-        std::cout << static_cast<json>(msg) << std::flush;
-    }
 }
 
 void localization_loop() {
@@ -55,7 +47,7 @@ void localization_loop() {
         double ds_l = s_l - s_l_prev;
         double ds_r = s_r - s_r_prev;
 
-        double ds = (ds_l + ds_r) / 2;
+        double ds = (ds_l+ds_r) / 2;
         double dtheta = wrap_angle_radians(theta - theta_prev);
 
         update_global_pose(ds, dtheta);

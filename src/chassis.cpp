@@ -3,6 +3,7 @@
 #include "main.h"
 #include "chassis.hpp"
 
+pros::Controller master(pros::E_CONTROLLER_MASTER);
 pros::MotorGroup left_motors({-1, -3, -11});
 pros::MotorGroup right_motors({8, 10, 20});
 pros::IMU imu(17);

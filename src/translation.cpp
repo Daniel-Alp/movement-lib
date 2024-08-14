@@ -38,8 +38,8 @@ Vector& Vector::operator*=(double scalar) {
 
 Vector Vector::rotate_by(double angle) {
     return Vector{
-        x * std::cos(angle) + y * std::sin(angle),
-        -x * std::sin(angle) + y * std::cos(angle),
+        x*std::cos(angle) + y*std::sin(angle),
+        -x*std::sin(angle) + y*std::cos(angle),
     };
 }
 

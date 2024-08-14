@@ -4,6 +4,8 @@
 const double WHEEL_DIAMETER = 3.25;
 const double WHEEL_TO_ENCODER_RATIO = 36.0/60.0;
 
+extern pros::Controller master;
+
 extern pros::MotorGroup left_motors;
 extern pros::MotorGroup right_motors;
 

@@ -20,20 +20,3 @@ inline void to_json(json& j, const Pose& pose) {
         {"theta", pose.theta},
     };
 }
-
-inline void to_json(json& j, const Vector& vector) {
-    j = json{
-        {"x", vector.x},
-        {"y", vector.y}
-    };
-}
-
-struct Test {
-    double value;
-};
-
-inline void to_json(json& j, const Test& test) {
-    j = json{
-        {"value", test.value}
-    };
-}

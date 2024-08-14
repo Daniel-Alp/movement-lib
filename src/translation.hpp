@@ -13,6 +13,15 @@ struct Vector {
     Vector& operator-=(const Vector& other);
     Vector& operator*=(double scalar);
 
-    // return translation rotated counter clockwise about the origin
+    // rotated counter clockwise about the origin (angle in radians)
     Vector rotate_by(double angle);       
+};
+
+struct Pose {
+    Vector coordinates;
+    double theta; // heading in radians
+
+    Pose();
+    Pose(double x, double y, double theta);
+    Pose(Vector coordinates, double theta);
 };

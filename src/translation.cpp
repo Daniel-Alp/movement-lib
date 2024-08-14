@@ -42,3 +42,9 @@ Vector Vector::rotate_by(double angle) {
         x * std::cos(angle) + y * std::sin(angle),
     };
 }
+
+Pose::Pose() : coordinates(0, 0), theta(0) {}
+
+Pose::Pose(double x, double y, double theta) : coordinates(x, y), theta(theta) {}
+
+Pose::Pose(Vector coordinates, double theta) : coordinates(coordinates), theta(theta) {}

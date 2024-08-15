@@ -2,7 +2,8 @@
 #include "main.h"
 
 const double WHEEL_DIAMETER = 3.25;
-const double WHEEL_TO_ENCODER_RATIO = 36.0/60.0;
+// const double WHEEL_TO_ENCODER_RATIO = 36.0/60.0; // Old chassis
+const double WHEEL_TO_ENCODER_RATIO = 36.0/48.0; // New chassis
 
 extern pros::Controller master;
 

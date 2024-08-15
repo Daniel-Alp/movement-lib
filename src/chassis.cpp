@@ -4,16 +4,21 @@
 #include "chassis.hpp"
 
 pros::Controller master(pros::E_CONTROLLER_MASTER);
-pros::MotorGroup left_motors({-1, -3, -11});
-pros::MotorGroup right_motors({8, 10, 20});
-pros::IMU imu(17);
+// old chassis
+// pros::MotorGroup left_motors({-1, -3, -11});
+// pros::MotorGroup right_motors({8, 10, 20});
+// pros::IMU imu(17);
+
+pros::MotorGroup left_motors({18, -19, -20});
+pros::MotorGroup right_motors({-11, 12, 14}); 
+pros::IMU imu(15);
 
 void set_left_velocity(double voltage) {
     left_motors.move_voltage(voltage);
 }
 
 void set_right_velocity(double voltage) {
-    right_motors.move_voltage(voltage * 0.93); // Adjust for uneven friction
+    right_motors.move_voltage(voltage);
 }
 
 double get_left_wheel_position() {

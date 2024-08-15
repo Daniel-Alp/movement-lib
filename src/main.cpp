@@ -15,6 +15,8 @@ void initialize() {
     while(imu.is_calibrating()) {
         pros::delay(10);
     }
+
+    std::cout << "foxlove" << std::endl; // Used to indicate new session
 }
 
 void disabled() {}

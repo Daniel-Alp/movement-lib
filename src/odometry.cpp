@@ -32,9 +32,9 @@ void update_global_pose(double ds, double dtheta) {
 
 void localization_loop() {
     double s_l = 0;
-    double s_l_prev = 0;
+    double s_l_prev = get_left_wheel_position();
     double s_r = 0;
-    double s_r_prev = 0;
+    double s_r_prev = get_right_wheel_position();
 
     double theta = 0;
     double theta_prev = 0;

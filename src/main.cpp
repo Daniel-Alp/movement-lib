@@ -23,20 +23,20 @@ void initialize() {
         localization_loop();
     });
 
-    // pros::Task pose_logging([=] {
-    //     while(true) {
-    //         // Round values so that messages take up less bytes and can be sent at a greater rate
-    //         Pose rounded_global_pose{
-    //             std::round(global_pose.coordinates.x * 1000) / 1000,
-    //             std::round(global_pose.coordinates.y * 1000) / 1000,
-    //             std::round(global_pose.theta * 1000) / 1000,
-    //         };
+    pros::Task pose_logging([=] {
+        while(true) {
+            // Round values so that messages take up less bytes and can be sent at a greater rate
+            Pose rounded_global_pose{
+                std::round(global_pose.coordinates.x * 1000) / 1000,
+                std::round(global_pose.coordinates.y * 1000) / 1000,
+                std::round(global_pose.theta * 1000) / 1000,
+            };
 
-    //         Message msg{"odometry", rounded_global_pose};
-    //         std::cout << static_cast<json>(msg) << std::endl;
-    //         pros::delay(40);
-    //     }
-    // });
+            Message msg{"odometry", rounded_global_pose};
+            std::cout << static_cast<json>(msg) << std::flush;
+            pros::delay(40);
+        }
+    });
 }
 
 void disabled() {}
@@ -44,10 +44,17 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-    move_straight(48);
-    move_straight(-48);
-    move_straight(24);
-    move_straight(-24);
+    pros::delay(1000);
+    turn_to(degrees_to_radians(45));
+    turn_to(degrees_to_radians(180));
+    turn_to(degrees_to_radians(315));
+    turn_to(degrees_to_radians(90));
+    turn_to(degrees_to_radians(0));
+
+    // move_straight(48);
+    // move_straight(-48);
+    // move_straight(24);
+    // move_straight(-24);
 }
 
 double map_input_to_voltage(double input) {

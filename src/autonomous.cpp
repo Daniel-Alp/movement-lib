@@ -106,8 +106,11 @@ void move_straight(double x_goal) {
         left_error_prev = left_error;
 
         if (index % 3 == 0) {
-            Velocities vels{get_left_wheel_velocity(), get_right_wheel_velocity(), segment.v};
-            Message msg{"velocity", vels};
+            Velocities vels{std::round(get_left_wheel_velocity() * 100) / 100, 
+                            std::round(get_right_wheel_velocity() * 100) / 100,
+                            std::round(segment.v * 100) / 100,
+                            pros::millis()};
+            Message msg{"straight", vels};
             std::cout << static_cast<json>(msg) << std::flush;
         }
 
@@ -125,5 +128,44 @@ void move_straight(double x_goal) {
 }
 
 void turn_to(double theta_goal) {
-    //TODO   
+    const double ALLOWED_ERROR = 0.05; // radians
+    const double kP = 0.8;
+    const double kD = 0.038;
+
+    double error = 0;
+    double error_prev = 0;
+
+    int index = 0;
+
+    do {
+        double theta = get_heading_radians();
+
+        error = wrap_angle_radians(theta_goal - theta);
+
+        double voltage = (kP * error + kD * (error - error_prev) / 0.01) * 12000;
+        if (std::abs(voltage) < 1200) {
+            voltage = 1200 * sgn(voltage);
+        } 
+
+        set_left_voltage(voltage);
+        set_right_voltage(-voltage);
+
+        error_prev = error;
+
+        if (index % 3 == 0) {
+            SPPV sppv{std::round(theta_goal * 100) / 100, 
+                    std::round(theta * 100) / 100,
+                    pros::millis()};
+            Message msg{"turning", sppv};
+            std::cout << static_cast<json>(msg) << std::endl;
+        }
+        index++;
+
+        pros::delay(10);
+    } while (std::abs(error) > ALLOWED_ERROR 
+            || get_left_wheel_velocity() > 5 
+            || get_right_wheel_velocity() > 5);
+
+    set_left_voltage(0);
+    set_right_voltage(0);   
 }

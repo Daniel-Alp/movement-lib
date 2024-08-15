@@ -19,3 +19,11 @@ inline double wrap_angle_radians(double theta) {
     }
     return theta;
 }
+
+inline double radians_to_degrees(double theta) {
+    return theta * (180/M_PI);
+}
+
+inline double degrees_to_radians(double theta) {
+    return theta * (M_PI/180);
+}
